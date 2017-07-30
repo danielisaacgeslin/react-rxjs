@@ -1,5 +1,15 @@
 import React, { Component } from 'react';
 import { Subject } from 'rxjs';
+import './reactive-input.component.css';
+
+/** @todo
+ * change name
+ * max and min length
+ * disabled
+ * loading ?
+ * textarea
+ * counter for resting length
+ */
 
 export default class ReactiveInput extends Component {
     static defaultProps = {
@@ -7,6 +17,7 @@ export default class ReactiveInput extends Component {
         type: 'text',
         placeholder: '',
         debounceTime: 500,
+        counter: false,
         onChange: value => { }
     };
 
@@ -24,7 +35,8 @@ export default class ReactiveInput extends Component {
             .do(value => this.setState({ value }))
             .debounceTime(this.props.debounceTime)
             .distinctUntilChanged()
-            .do(value => this.props.onChange(this.state.value));
+            .do(value => this.props.onChange(this.state.value))
+            .do(() => this.setState({ value: this.props.value }));
         this.subs = this.change$.subscribe();
     }
 
@@ -38,13 +50,21 @@ export default class ReactiveInput extends Component {
 
     render() {
         return (
-            <input
-                className="form-control"
-                value={this.state.value}
-                placeholder={this.props.placeholder}
-                type={this.props.type}
-                onChange={event => this.onChange(event)}
-            />
+            <div className="reactive-input">
+                <input
+                    className="form-control"
+                    value={this.state.value}
+                    placeholder={this.props.placeholder}
+                    type={this.props.type}
+                    onChange={event => this.onChange(event)}
+                />
+                {
+                    this.props.counter &&
+                    <div className="reactive-input__counter">
+                        {this.state.value ? this.state.value.length : 0}
+                    </div>
+                }
+            </div>
         );
     }
 }

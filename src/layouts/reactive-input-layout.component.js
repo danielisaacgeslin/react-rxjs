@@ -20,6 +20,7 @@ export default class ReactiveInputLayout extends Component {
                         <ReactiveInput
                             placeholder="type here"
                             value={this.state.value}
+                            counter={true}
                             onChange={value => this.setState({ value })}>
                         </ReactiveInput>
                     </div>
