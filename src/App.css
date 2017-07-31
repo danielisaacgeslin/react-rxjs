@@ -1,6 +1,10 @@
 .app-logo {
   animation: App-logo-spin infinite 20s linear;
-  height: 40px; }
+  height: 35px;
+  vertical-align: bottom; }
+
+.app-title {
+  text-align: left; }
 
 .app-header {
   background-color: #222;

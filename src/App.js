@@ -10,8 +10,16 @@ export default class App extends Component {
     return (
       <div className="app">
         <div className="app-header">
-          <img src={logo} className="app-logo" alt="logo" />
-          <h2>Some Components with React and RxJs</h2>
+          <div className="container">
+            <div className="row">
+              <div className="col">
+                <h2 className="app-title">
+                  <img src={logo} className="app-logo" alt="logo" />
+                  Some Components with React and RxJs
+                </h2>
+              </div>
+            </div>
+          </div>
         </div>
         <BrowserRouter>
           <Switch>

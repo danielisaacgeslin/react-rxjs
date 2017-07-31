@@ -5,7 +5,7 @@ import { ReactiveInput } from '../main-components';
 export default class ReactiveInputLayout extends Component {
     static path = 'reactive-input';
     state = {
-        value: '',
+        value: ''
     }
     counter = 0;
 
