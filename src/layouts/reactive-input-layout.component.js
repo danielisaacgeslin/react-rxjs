@@ -19,7 +19,6 @@ export default class ReactiveInputLayout extends Component {
             <div className="container">
                 <div className="row">
                     <div className="col">
-                        <h1>Reactive Input</h1>
                         <p><strong>The value is: </strong>{this.state.value}.</p>
                         <p><strong>The value was changed: </strong>{this.counter} times.</p>
                         <ReactiveInput
