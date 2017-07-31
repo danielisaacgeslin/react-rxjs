@@ -11,12 +11,16 @@
     "rxjs": "^5.4.2"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "concurrently \"npm run watch-css\" \"react-scripts start\"",
+    "build-css": "node-sass-chokidar src/ -o src/",
+    "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
+    "build": "concurrently \"npm run build-css\" \"react-scripts build\"",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
   "devDependencies": {
-    "@types/rx": "^4.1.1"
+    "@types/rx": "^4.1.1",
+    "concurrently": "^3.5.0",
+    "node-sass-chokidar": "0.0.3"
   }
 }

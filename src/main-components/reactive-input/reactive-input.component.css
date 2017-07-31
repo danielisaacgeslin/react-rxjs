@@ -1,7 +1,2 @@
-.reactive-input {
-    position: relative;
-}
 .reactive-input__counter {
-    position: absolute;
-    right: 0;
-}
+  text-align: right; }
