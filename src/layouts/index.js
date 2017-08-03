@@ -1,3 +1,3 @@
-import ReactiveInputLayout from './reactive-input-layout.component';
+import DTInputLayout from './dt-input-layout.component';
 
-export { ReactiveInputLayout };
+export { DTInputLayout };

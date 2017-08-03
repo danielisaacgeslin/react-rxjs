@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 import { Subject } from 'rxjs';
-import './reactive-input.component.css';
+import './dt-input.component.css';
 
 /** @todo
- * change name
- * loading ?
  * textarea
  * validation status
  */
 
-export default class ReactiveInput extends Component {
+export default class DTInput extends Component {
     static defaultProps = {
         value: '',
         type: 'text',
@@ -55,7 +53,7 @@ export default class ReactiveInput extends Component {
         const valueLength = this.state.value ? this.state.value.length : 0;
         const counter = this.props.maxLength ? Math.abs(valueLength - this.props.maxLength) : valueLength;
         return (
-            <div className="reactive-input">
+            <div className="dt-input">
                 <input
                     className="form-control"
                     value={this.state.value}
@@ -65,7 +63,7 @@ export default class ReactiveInput extends Component {
                     type={this.props.type}
                     onChange={event => this.onChange(event)}
                 />
-                {this.props.counter && <div className="reactive-input__counter">{counter}</div>}
+                {this.props.counter && <div className="dt-input__counter">{counter}</div>}
             </div>
         );
     }

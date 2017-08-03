@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 
-import { ReactiveInput } from '../main-components';
+import { DTInput } from '../main-components';
 
-export default class ReactiveInputLayout extends Component {
-    static path = 'reactive-input';
+export default class DTInputLayout extends Component {
+    static path = 'dt-input';
     state = {
         value: ''
     }
@@ -21,14 +21,14 @@ export default class ReactiveInputLayout extends Component {
                     <div className="col">
                         <p><strong>The value is: </strong>{this.state.value}.</p>
                         <p><strong>The value was changed: </strong>{this.counter} times.</p>
-                        <ReactiveInput
+                        <DTInput
                             placeholder="type here"
                             value={this.state.value}
                             maxLength={null}
                             disabled={false}
                             counter={true}
                             onChange={value => this.onChange(value)}>
-                        </ReactiveInput>
+                        </DTInput>
                     </div>
                 </div>
             </div>

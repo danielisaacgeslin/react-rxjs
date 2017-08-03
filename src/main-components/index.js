@@ -1,3 +1,3 @@
-import ReactiveInput from './reactive-input/reactive-input.component';
+import DTInput from './dt-input/dt-input.component';
 
-export { ReactiveInput };
+export { DTInput };

@@ -26,15 +26,15 @@ export default class App extends Component {
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
               <ul className="navbar-nav mr-auto">
                 <li className="nav-item">
-                  <Link className="nav-link" to={`/${layouts.ReactiveInputLayout.path}`}>Reactive Input</Link>
+                  <Link className="nav-link" to={`/${layouts.DTInputLayout.path}`}>Input</Link>
                 </li>
               </ul>
             </div>
           </nav>
             <Switch>
               <Switch>
-                <Route path={`/${layouts.ReactiveInputLayout.path}`} component={layouts.ReactiveInputLayout}></Route>
-                <Route component={layouts.ReactiveInputLayout}></Route>
+                <Route path={`/${layouts.DTInputLayout.path}`} component={layouts.DTInputLayout}></Route>
+                <Route component={layouts.DTInputLayout}></Route>
               </Switch>
             </Switch>
         </div>
