@@ -28,15 +28,19 @@ export default class App extends Component {
                 <li className="nav-item">
                   <Link className="nav-link" to={`/${layouts.DTInputLayout.path}`}>Input</Link>
                 </li>
+                <li>
+                  <Link className="nav-link" to={`/${layouts.DTCarrouselLayout.path}`}>Carrousel</Link>
+                </li>
               </ul>
             </div>
           </nav>
+          <Switch>
             <Switch>
-              <Switch>
-                <Route path={`/${layouts.DTInputLayout.path}`} component={layouts.DTInputLayout}></Route>
-                <Route component={layouts.DTInputLayout}></Route>
-              </Switch>
+              <Route path={`/${layouts.DTInputLayout.path}`} component={layouts.DTInputLayout}></Route>
+              <Route path={`/${layouts.DTCarrouselLayout.path}`} component={layouts.DTCarrouselLayout}></Route>
+              <Route component={layouts.DTInputLayout}></Route>
             </Switch>
+          </Switch>
         </div>
       </BrowserRouter>
     );

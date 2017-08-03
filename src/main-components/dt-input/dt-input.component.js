@@ -18,13 +18,9 @@ export default class DTInput extends Component {
         disabled: false,
         onChange: value => { }
     };
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            value: this.props.value
-        };
-    }
+    state = {
+        value: this.props.value
+    };
 
     componentWillMount() {
         this.trigger$ = new Subject();

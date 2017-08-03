@@ -1,0 +1,15 @@
+.dt-carrousel {
+
+}
+
+.dt-carrousel-slides-container {
+    height: 30px; // todo
+    overflow: hidden;
+    position: relative;
+
+    &__slide {
+        position: absolute;
+        top: 0;
+        width: 100%;
+    }
+}
