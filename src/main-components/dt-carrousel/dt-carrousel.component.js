@@ -7,12 +7,17 @@ export default class DTCarrousel extends Component {
         position: 0,
         slides: [],
         animationMS: 350,
-        FPS: 60
+        FPS: 60,
+        autoplay: false,
+        autoplayTimer: 5000
     };
     state = {
         position: this.props.position,
         slides: this.props.slides
     };
+    autoplayInterval = 0;
+    maxHeight = 0;
+    controlHeight = 30;
 
     constructor(props) {
         super(props);
@@ -29,9 +34,9 @@ export default class DTCarrousel extends Component {
         const forward = newPosition - this.state.position > 0;
         const tweeks = this.props.animationMS / (1000 / this.props.FPS);
         const difference =
-            forward 
-            ? (newPosition - this.state.position) / tweeks
-            : (this.state.position - newPosition) / tweeks
+            forward
+                ? (newPosition - this.state.position) / tweeks
+                : (this.state.position - newPosition) / tweeks
 
         const interval = setInterval(() => {
             let newPositionTweek = this.state.position + (forward ? difference : difference * - 1);
@@ -63,30 +68,72 @@ export default class DTCarrousel extends Component {
     }
 
     componentWillUnmount() {
+        clearInterval(this.autoplayInterval);
+    }
 
+    componentDidMount() {
+        this.adjustSliderHeight();
     }
 
     componentWillReceiveProps(props) {
         this.setState({ slides: this.props.children });
     }
 
+    handleAutoplay() {
+        clearInterval(this.autoplayInterval);
+        if (!this.props.autoplay) return;
+        this.autoplayInterval = setInterval(() => {
+            this.goForward();
+        }, this.props.autoplayTimer);
+    }
+
+    adjustSliderHeight() {
+        let maxHeight = 0;
+        for (let ref in this.refs) {
+            if (!/^slide-/.test(ref)) continue;
+            let height = this.refs[ref].offsetHeight;
+            maxHeight = height > maxHeight ? height : maxHeight;
+        }
+        if (maxHeight !== this.state.maxHeight) this.setState({ maxHeight });
+    }
+
     render() {
-        const slides = this.state.slides.map((slide, index) => {
-            return (
-                <div
-                    key={index}
-                    style={{ left: `${(index - this.state.position) * 100}%` }}
-                    className="dt-carrousel-slides-container__slide">
-                    {slide}
-                </div>
-            );
-        });
+        this.handleAutoplay();
+        setTimeout(() => this.adjustSliderHeight(), 0);
+
+        const isChanging = this.state.position % 1 !== 0;
+        const controlTop = (this.state.maxHeight / 2) - (this.controlHeight / 2);
+        const slides = this.state.slides.map((slide, index) => (
+            <div
+                key={index}
+                ref={`slide-${index}`}
+                style={{ left: `${(index - this.state.position) * 100}%` }}
+                className="dt-carrousel-slides-container__slide">
+                {slide}
+            </div>
+        ));
+
         return (
             <div className="dt-carrousel">
-                <p><strong>position: </strong>{this.state.position}</p>
-                <button onClick={this.goBack}>Back</button>
-                <button onClick={this.goForward}>Forward</button>
-                <div className="dt-carrousel-slides-container">{slides}</div>
+                <button
+                    className="dt-carrousel__control dt-carrousel__control_left"
+                    disabled={isChanging}
+                    style={{ height: this.controlHeight, top: `${controlTop}px` }}
+                    onClick={this.goBack}>
+                    L
+                </button>
+                <button
+                    className="dt-carrousel__control dt-carrousel__control_right"
+                    disabled={isChanging}
+                    style={{ height: this.controlHeight, top: `${controlTop}px` }}
+                    onClick={this.goForward}>
+                    R
+                </button>
+                <div
+                    className="dt-carrousel-slides-container"
+                    style={{ height: `${this.state.maxHeight}px` }}>
+                    {slides}
+                </div>
             </div>
         );
     }
