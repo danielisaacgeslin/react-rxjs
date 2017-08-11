@@ -31,6 +31,9 @@ export default class App extends Component {
                 <li>
                   <Link className="nav-link" to={`/${layouts.DTCarrouselLayout.path}`}>Carrousel</Link>
                 </li>
+                <li>
+                  <Link className="nav-link" to={`/${layouts.DTSidebarLayout.path}`}>Sidebar</Link>
+                </li>
               </ul>
             </div>
           </nav>
@@ -38,6 +41,7 @@ export default class App extends Component {
             <Switch>
               <Route path={`/${layouts.DTInputLayout.path}`} component={layouts.DTInputLayout}></Route>
               <Route path={`/${layouts.DTCarrouselLayout.path}`} component={layouts.DTCarrouselLayout}></Route>
+              <Route path={`/${layouts.DTSidebarLayout.path}`} component={layouts.DTSidebarLayout}></Route>
               <Route component={layouts.DTInputLayout}></Route>
             </Switch>
           </Switch>
